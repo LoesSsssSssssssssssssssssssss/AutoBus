@@ -149,7 +149,7 @@
 }
 
 .h1_offer > span {
-  color: #F07E07;
+  color: #f07e07;
 }
 
 .h2_offer {
@@ -181,7 +181,7 @@
   height: 53px;
   border: none;
   border-radius: 10px;
-  background-color: #F07E07;
+  background-color: #f07e07;
   color: white;
   font-size: 20px;
   font-family: 'PT Sans Bold';
@@ -197,7 +197,7 @@ h2 {
 }
 
 h2 > span {
-  color: #F07E07;
+  color: #f07e07;
 }
 
 .about_us {
@@ -231,28 +231,26 @@ h2 > span {
   width: 435px;
   height: 310px;
   border-radius: 10px;
-  box-shadow: 1px 1px 25px -4px rgba(0,0,0,0.25);
+  box-shadow: 1px 1px 25px -4px rgba(0, 0, 0, 0.25);
 }
 
 .about_us_right_blockimg:nth-child(1) {
-  background-image: url("./img/about1.webp");
+  background-image: url('./img/about1.webp');
   position: relative;
   z-index: 1;
   top: 12%;
 }
 
 .about_us_right_blockimg:nth-child(2) {
-  background-image: url("./img/about2.webp");
+  background-image: url('./img/about2.webp');
   position: relative;
   z-index: 2;
   right: 75%;
 }
 
 .about_us_right_blockimg:nth-child(3) {
-  background-image: url("./img/about3.webp");
+  background-image: url('./img/about3.webp');
   position: relative;
   z-index: 3;
   bottom: 12%;
 }
-
-
