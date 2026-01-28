@@ -10,36 +10,43 @@
 
 @font-face {
   font-family: 'PT Sans Regular';
-  src: url('/style/fonts/PT_Sans-Web-Regular.ttf') format('woff2');
+  src: url('./fonts/PT_Sans-Web-Regular.ttf') format('woff2');
 }
 
 @font-face {
   font-family: 'PT Sans Bold';
-  src: url('/style/fonts/PT_Sans-Web-Bold.ttf') format('woff2');
+  src: url('./fonts/PT_Sans-Web-Bold.ttf') format('woff2');
 }
 
 @font-face {
   font-family: 'Raleway SemiBold';
-  src: url('/style/fonts/Raleway-v4020-SemiBold.otf') format('woff2');
+  src: url('./fonts/Raleway-v4020-SemiBold.otf') format('woff2');
 }
 
 @font-face {
   font-family: 'Raleway Bold';
-  src: url('/style/fonts/Raleway-v4020-Bold.otf') format('woff2');
+  src: url('./fonts/Raleway-v4020-Bold.otf') format('woff2');
 }
 
 @font-face {
   font-family: 'Raleway Medium';
-  src: url('/style/fonts/Raleway-v4020-Medium.otf') format('woff2');
+  src: url('./fonts/Raleway-v4020-Medium.otf') format('woff2');
 }
 
 @font-face {
   font-family: 'Raleway Regular';
-  src: url('/style/fonts/Raleway-v4020-Regular.otf') format('woff2');
+  src: url('./fonts/Raleway-v4020-Regular.otf') format('woff2');
 }
 
 .main_container {
   width: 1490px;
+}
+
+.body_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .offer_fon {
@@ -123,3 +130,129 @@
   color: #000;
   text-decoration: none;
 }
+
+.offer_content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 40px;
+}
+
+.h1_offer {
+  font-size: 48px;
+  font-family: 'Raleway Bold';
+  font-weight: 700px;
+  color: #333942;
+  text-align: center;
+}
+
+.h1_offer > span {
+  color: #F07E07;
+}
+
+.h2_offer {
+  font-size: 32px;
+  font-family: 'PT Sans Regular';
+  font-weight: 400;
+  color: #484848;
+}
+
+.offer_advantages {
+  display: flex;
+  gap: 30px;
+}
+
+.offer_advantages > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.h3_offer {
+  font-size: 24px;
+  font-family: 'PT Sans Regular';
+  font-weight: 400;
+  color: #484848;
+}
+.offer_content > button {
+  width: 203px;
+  height: 53px;
+  border: none;
+  border-radius: 10px;
+  background-color: #F07E07;
+  color: white;
+  font-size: 20px;
+  font-family: 'PT Sans Bold';
+  font-weight: 700;
+  cursor: pointer;
+}
+
+h2 {
+  font-size: 40px;
+  font-family: 'Raleway Bold';
+  font-weight: 700px;
+  color: #000;
+}
+
+h2 > span {
+  color: #F07E07;
+}
+
+.about_us {
+  display: flex;
+}
+
+.about_us_left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about_us_left > img {
+  width: 523px;
+  height: 200px;
+  margin-top: 12%;
+}
+
+.about_us_left > p {
+  font-size: 24px;
+  font-family: 'PT Sans Regular';
+  font-weight: 400;
+  color: #000;
+  width: 65%;
+  margin-top: 5%;
+}
+
+.about_us_right_blockimg {
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 435px;
+  height: 310px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 25px -4px rgba(0,0,0,0.25);
+}
+
+.about_us_right_blockimg:nth-child(1) {
+  background-image: url("./img/about1.webp");
+  position: relative;
+  z-index: 1;
+  top: 12%;
+}
+
+.about_us_right_blockimg:nth-child(2) {
+  background-image: url("./img/about2.webp");
+  position: relative;
+  z-index: 2;
+  right: 75%;
+}
+
+.about_us_right_blockimg:nth-child(3) {
+  background-image: url("./img/about3.webp");
+  position: relative;
+  z-index: 3;
+  bottom: 12%;
+}
+
+
