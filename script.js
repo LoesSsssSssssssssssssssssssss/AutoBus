@@ -1,11 +1,9 @@
-// Данные для слайдера с настоящими изображениями
 const carsData = [
   {
-    brand: 'Volkswagen',
+    brand: 'Lada',
     logoImage:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Volkswagen_logo_2019.svg/1200px-Volkswagen_logo_2019.svg.png',
-    carImage:
-      'https://images.unsplash.com/photo-1563720223485-41b7d8f5a398?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
+      'https://upload.wikimedia.org/wikipedia/commons/d/d9/Lada_company_logo_image.png',
+    carImage: 'https://pngimg.com/uploads/lada/lada_PNG99.png',
   },
   {
     brand: 'Ford',
@@ -29,6 +27,13 @@ const carsData = [
       'https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
   },
   {
+    brand: 'Bugatti',
+    logoImage:
+      'https://upload.wikimedia.org/wikipedia/commons/6/60/Bugatti_logo.svg',
+    carImage:
+      'https://www.pngplay.com/wp-content/uploads/13/Bugatti-Veyron-Background-PNG-Image.png',
+  },
+  {
     brand: 'Volkswagen',
     logoImage: './style/img/VW logo.png',
     carImage: './style/img/VW.png',
@@ -50,10 +55,10 @@ let isDragging = false;
 let startX = 0;
 let currentX = 0;
 let dragDistance = 0;
-const dragThreshold = 40; // Уменьшен порог для более быстрого реагирования
+const dragThreshold = 40;
 let canSwipe = true;
 let lastSwipeTime = 0;
-const swipeCooldown = 50; // Уменьшено с ~200ms до 50ms
+const swipeCooldown = 50;
 const brandTitle = document.getElementById('brandTitle');
 const logosContainer = document.getElementById('logosContainer');
 const carsContainer = document.getElementById('carsContainer');
@@ -68,15 +73,15 @@ function initSlider() {
     const logoItem = document.createElement('div');
     logoItem.className = 'logo-item';
     logoItem.dataset.index = index;
+    logoItem.style.display = 'none'; // Добавляем: сразу скрываем все логотипы
 
     // Создаем изображение логотипа
     const logoImg = document.createElement('img');
     logoImg.className = 'brand-logo';
     logoImg.src = car.logoImage;
     logoImg.alt = `${car.brand} logo`;
-    logoImg.loading = 'eager'; // Быстрая загрузка
+    logoImg.loading = 'eager';
     logoImg.onerror = function () {
-      // Если изображение не загрузилось, показываем текст
       this.style.display = 'none';
       const fallback = document.createElement('div');
       fallback.textContent = car.brand.substring(0, 2).toUpperCase();
@@ -102,9 +107,8 @@ function initSlider() {
     carImg.className = 'car-image';
     carImg.src = car.carImage;
     carImg.alt = `${car.brand} car`;
-    carImg.loading = 'lazy'; // Ленивая загрузка для остальных
+    carImg.loading = 'lazy';
     carImg.onerror = function () {
-      // Если изображение не загрузилось, показываем заглушку
       this.style.display = 'none';
       const fallback = document.createElement('div');
       fallback.style.width = '100%';
@@ -129,8 +133,7 @@ function initSlider() {
 
 // Предзагрузка изображений для плавности
 function preloadImages() {
-  // Предзагружаем первые 3 изображения для плавности
-  for (let i = 0; i < Math.min(3, carsData.length); i++) {
+  for (let i = 0; i < Math.min(7, carsData.length); i++) {
     const car = carsData[i];
     const img1 = new Image();
     img1.src = car.logoImage;
@@ -139,66 +142,74 @@ function preloadImages() {
   }
 }
 
-// Упрощенная функция обновления слайдера
+// Функция обновления слайдера с 7 логотипами
 function updateSlider() {
   const totalItems = carsData.length;
 
   // Обновляем заголовок
   brandTitle.textContent = carsData[currentIndex].brand;
 
-  // Обновляем логотипы
+  // Обновляем логотипы - 7 штук
   const logos = document.querySelectorAll('.logo-item');
 
-  // Всегда показываем только 3 логотипа
-  for (let i = -1; i <= 1; i++) {
+  // Сначала скрываем все логотипы
+  logos.forEach((logo) => {
+    logo.style.opacity = '0';
+    logo.style.display = 'none'; // Изменено: полностью скрываем
+    logo.style.pointerEvents = 'none';
+    logo.className = 'logo-item';
+  });
+
+  // Показываем 7 логотипов: текущий и по 3 с каждой стороны
+  for (let i = -3; i <= 3; i++) {
     let logoIndex = currentIndex + i;
 
     // Корректируем индекс для бесконечного цикла
-    if (logoIndex < 0) logoIndex = totalItems - 1;
-    if (logoIndex >= totalItems) logoIndex = 0;
+    if (logoIndex < 0) {
+      logoIndex = totalItems + logoIndex;
+      if (logoIndex < 0) logoIndex = totalItems + logoIndex;
+    }
+    if (logoIndex >= totalItems) {
+      logoIndex = logoIndex % totalItems;
+    }
 
     const logo = logos[logoIndex];
     if (logo) {
+      logo.style.display = 'block'; // Изменено: показываем только нужные
       logo.style.opacity = '1';
       logo.style.pointerEvents = 'all';
-      logo.style.transform = '';
       logo.className = 'logo-item';
 
       if (i === 0) {
         logo.classList.add('active');
+      } else if (i === -3) {
+        logo.classList.add('left-3');
+      } else if (i === -2) {
+        logo.classList.add('left-2');
       } else if (i === -1) {
-        logo.classList.add('left');
+        logo.classList.add('left-1');
       } else if (i === 1) {
-        logo.classList.add('right');
+        logo.classList.add('right-1');
+      } else if (i === 2) {
+        logo.classList.add('right-2');
+      } else if (i === 3) {
+        logo.classList.add('right-3');
       }
     }
   }
 
-  // Скрываем остальные логотипы
-  logos.forEach((logo, index) => {
-    let shouldShow = false;
-    for (let i = -1; i <= 1; i++) {
-      let checkIndex = currentIndex + i;
-      if (checkIndex < 0) checkIndex = totalItems - 1;
-      if (checkIndex >= totalItems) checkIndex = 0;
-
-      if (index === checkIndex) {
-        shouldShow = true;
-        break;
-      }
-    }
-
-    if (!shouldShow) {
-      logo.style.opacity = '0';
-      logo.style.pointerEvents = 'none';
-      logo.style.transform = 'scale(0)';
-    }
-  });
-
   // Обновляем автомобили
   const cars = document.querySelectorAll('.car-item');
 
-  // Всегда показываем только 3 автомобиля
+  // Сначала скрываем все автомобили
+  cars.forEach((car) => {
+    car.style.opacity = '0';
+    car.style.pointerEvents = 'none';
+    car.style.transform = 'scale(0)';
+    car.className = 'car-item';
+  });
+
+  // Показываем 3 автомобиля: активный и по 1 с каждой стороны
   for (let i = -1; i <= 1; i++) {
     let carIndex = currentIndex + i;
 
@@ -222,27 +233,6 @@ function updateSlider() {
       }
     }
   }
-
-  // Скрываем остальные автомобили
-  cars.forEach((car, index) => {
-    let shouldShow = false;
-    for (let i = -1; i <= 1; i++) {
-      let checkIndex = currentIndex + i;
-      if (checkIndex < 0) checkIndex = totalItems - 1;
-      if (checkIndex >= totalItems) checkIndex = 0;
-
-      if (index === checkIndex) {
-        shouldShow = true;
-        break;
-      }
-    }
-
-    if (!shouldShow) {
-      car.style.opacity = '0';
-      car.style.pointerEvents = 'none';
-      car.style.transform = 'scale(0)';
-    }
-  });
 
   // Разрешаем следующий свайп сразу
   canSwipe = true;
@@ -281,11 +271,9 @@ function prevSlide() {
 
 // Добавление обработчиков перетаскивания
 function addDragEvents() {
-  // Для десктопных устройств
   logosContainer.addEventListener('mousedown', startDrag);
   carsContainer.addEventListener('mousedown', startDrag);
 
-  // Для мобильных устройств
   logosContainer.addEventListener('touchstart', startDragTouch, {
     passive: false,
   });
@@ -293,32 +281,25 @@ function addDragEvents() {
     passive: false,
   });
 
-  // Отслеживание движения
   document.addEventListener('mousemove', drag);
   document.addEventListener('touchmove', dragTouch, { passive: false });
 
-  // Завершение перетаскивания
   document.addEventListener('mouseup', endDrag);
   document.addEventListener('touchend', endDrag);
 
-  // Добавляем возможность быстрого свайпа мышкой по всей области слайдера
   const slider = document.querySelector('.car-slider');
   slider.addEventListener('wheel', handleWheel);
-
-  // Добавляем быстрые клики по бокам слайдера
   slider.addEventListener('click', handleQuickClick);
 }
 
 // Обработка колесика мыши для быстрого переключения
 function handleWheel(e) {
   const now = Date.now();
-  if (now - lastSwipeTime < 30) return; // Ограничение 30ms для колесика
+  if (now - lastSwipeTime < 30) return;
 
   if (e.deltaY > 0) {
-    // Колесико вниз - следующий слайд
     nextSlide();
   } else if (e.deltaY < 0) {
-    // Колесико вверх - предыдущий слайд
     prevSlide();
   }
   e.preventDefault();
@@ -330,13 +311,10 @@ function handleQuickClick(e) {
   const clickX = e.clientX - sliderRect.left;
   const sliderWidth = sliderRect.width;
 
-  // Если клик в левой трети - предыдущий слайд
   if (clickX < sliderWidth / 3) {
     prevSlide();
     e.preventDefault();
-  }
-  // Если клик в правой трети - следующий слайд
-  else if (clickX > (sliderWidth * 2) / 3) {
+  } else if (clickX > (sliderWidth * 2) / 3) {
     nextSlide();
     e.preventDefault();
   }
@@ -379,20 +357,16 @@ function endDrag() {
 
   isDragging = false;
 
-  // Определяем направление и силу свайпа
   if (Math.abs(dragDistance) > dragThreshold && canSwipe) {
     const now = Date.now();
     if (now - lastSwipeTime >= swipeCooldown) {
       if (dragDistance > 0) {
-        // Свайп вправо - предыдущий слайд
         prevSlide();
       } else {
-        // Свайп влево - следующий слайд
         nextSlide();
       }
     }
   } else {
-    // Если свайп был слабым, разрешаем следующий
     canSwipe = true;
   }
 
@@ -401,8 +375,194 @@ function endDrag() {
   dragDistance = 0;
 }
 
+// Данные для блока "Почему именно мы"
+const whyUsData = [
+  {
+    number: '01',
+    title: 'Гибкая оплата',
+    content:
+      'Мы предлагаем различные варианты оплаты: наличный и безналичный расчет, рассрочка, оплата картой. Выбирайте удобный для вас способ!',
+  },
+  {
+    number: '02',
+    title: 'Широкий ассортимент',
+    content:
+      'Более 50 000 наименований автозапчастей в наличии на складе. Оригинальные запчасти и качественные аналоги для всех популярных марок.',
+  },
+  {
+    number: '03',
+    title: 'Гарантии',
+    content:
+      'На все запчасти предоставляется гарантия от 6 до 36 месяцев. Мы уверены в качестве нашей продукции и даем официальные гарантийные обязательства.',
+  },
+  {
+    number: '04',
+    title: 'Быстрая доставка',
+    content:
+      'Доставка по городу в течение 2 часов. По области - в течение суток. По России - от 1 до 5 дней в зависимости от региона.',
+  },
+  {
+    number: '05',
+    title: 'Подбор запчастей',
+    content:
+      'Профессиональная консультация и подбор запчастей по VIN-коду или модели автомобиля. Поможем найти даже редкие детали.',
+  },
+  {
+    number: '06',
+    title: 'Низкие цены',
+    content:
+      'Прямые поставки от производителей позволяют нам предлагать цены на 15-20% ниже среднерыночных. Регулярные акции и скидки.',
+  },
+];
+
+// Изображения для слайдера
+const slidesImages = [
+  './style/img/why-us-1.jpg',
+  './style/img/why-us-2.jpg',
+  './style/img/why-us-3.jpg',
+  './style/img/why-us-4.jpg',
+  './style/img/why-us-5.jpg',
+  './style/img/why-us-6.jpg',
+];
+
+// Инициализация блока "Почему именно мы"
+function initWhyUsSection() {
+  const accordionContainer = document.getElementById('whyUsAccordion');
+  const slideshowContainer = document.getElementById('slideshowContainer');
+
+  // Заполняем аккордеон
+  whyUsData.forEach((item, index) => {
+    const accordionItem = document.createElement('div');
+    accordionItem.className = 'accordion-item';
+    accordionItem.dataset.index = index;
+
+    const accordionHeader = document.createElement('div');
+    accordionHeader.className = 'accordion-header';
+
+    accordionHeader.innerHTML = `
+      <div class="accordion-number">${item.number}</div>
+      <div class="accordion-title">
+        ${item.title}
+      </div>
+      <div class="accordion-arrow">▼</div>
+    `;
+
+    const accordionContent = document.createElement('div');
+    accordionContent.className = 'accordion-content';
+
+    const accordionContentInner = document.createElement('div');
+    accordionContentInner.className = 'accordion-content-inner';
+    accordionContentInner.textContent = item.content;
+
+    accordionContent.appendChild(accordionContentInner);
+
+    accordionHeader.addEventListener('click', function () {
+      const isActive = accordionHeader.classList.contains('active');
+      const content = this.nextElementSibling;
+
+      if (!isActive) {
+        // Закрываем все другие
+        document
+          .querySelectorAll('.accordion-header.active')
+          .forEach((activeHeader) => {
+            if (activeHeader !== this) {
+              const activeContent = activeHeader.nextElementSibling;
+              activeHeader.classList.remove('active');
+              activeContent.style.height = '0';
+            }
+          });
+
+        // Открываем текущий
+        this.classList.add('active');
+        const contentHeight = content.scrollHeight;
+        content.style.height = contentHeight + 'px';
+      } else {
+        // Закрываем текущий
+        this.classList.remove('active');
+        content.style.height = '0';
+      }
+    });
+
+    accordionItem.appendChild(accordionHeader);
+    accordionItem.appendChild(accordionContent);
+    accordionContainer.appendChild(accordionItem);
+  });
+
+  // Заполняем слайдер изображений
+  slidesImages.forEach((imageSrc, index) => {
+    const slideElement = document.createElement('div');
+    slideElement.className = 'slide';
+    slideElement.dataset.index = index;
+
+    const imgElement = document.createElement('img');
+    imgElement.className = 'slide-image';
+    imgElement.src = imageSrc;
+    imgElement.alt = `Изображение ${index + 1}`;
+    imgElement.onerror = function () {
+      this.style.display = 'none';
+      slideElement.style.backgroundColor = getColorByIndex(index);
+    };
+
+    slideElement.appendChild(imgElement);
+    slideshowContainer.appendChild(slideElement);
+  });
+
+  // Активируем первый слайд
+  const firstSlide = document.querySelector('.slide');
+  if (firstSlide) {
+    firstSlide.classList.add('active');
+  }
+
+  // Автоматическое переключение слайдов
+  let currentSlide = 0;
+  const totalSlides = slidesImages.length;
+
+  function nextSlideWhyUs() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateWhyUsSlider();
+  }
+
+  setInterval(nextSlideWhyUs, 5000);
+
+  function updateWhyUsSlider() {
+    document.querySelectorAll('.slide').forEach((slide) => {
+      slide.classList.remove('active');
+    });
+
+    const activeSlide = document.querySelector(
+      `.slide[data-index="${currentSlide}"]`
+    );
+    if (activeSlide) {
+      activeSlide.classList.add('active');
+    }
+  }
+
+  window.goToSlideWhyUs = function (index) {
+    currentSlide = index;
+    updateWhyUsSlider();
+  };
+}
+
+function getColorByIndex(index) {
+  const colors = [
+    '#FFE4B5',
+    '#E0FFFF',
+    '#F0FFF0',
+    '#FFF0F5',
+    '#F5F5DC',
+    '#F0F8FF',
+  ];
+  return colors[index % colors.length];
+}
+
 // Инициализация при загрузке
-document.addEventListener('DOMContentLoaded', initSlider);
+document.addEventListener('DOMContentLoaded', function () {
+  initSlider();
+
+  if (document.getElementById('whyUsAccordion')) {
+    initWhyUsSection();
+  }
+});
 
 // Горячие клавиши для клавиатуры
 document.addEventListener('keydown', (e) => {
