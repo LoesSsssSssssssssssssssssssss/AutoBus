@@ -577,3 +577,27 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
   }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalOpenBtn = document.querySelector('[data-modal-open]');
+
+  modalOpenBtn.addEventListener('click', () => {
+    modalOverlay.classList.add('active');
+    document.body.classList.add('modal-open'); // блокируем скролл
+  });
+
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      modalOverlay.classList.remove('active');
+      document.body.classList.remove('modal-open'); // разрешаем скролл
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      modalOverlay.classList.remove('active');
+      document.body.classList.remove('modal-open'); // разрешаем скролл
+    }
+  });
+});
