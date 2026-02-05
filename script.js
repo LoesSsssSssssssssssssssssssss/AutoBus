@@ -1,38 +1,31 @@
 const carsData = [
   {
     brand: 'Nissan',
-    logoImage:
-      './style/img/nissanlogo.webp',
-    carImage:
-      './style/img/Nissan.png',
+    logoImage: './style/img/nissanlogo.png',
+    carImage: './style/img/Nissan.png',
   },
   {
     brand: 'Ford',
     logoImage:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Ford_Motor_Company_Logo.svg/1200px-Ford_Motor_Company_Logo.svg.png',
-    carImage:
-      './style/img/Ford.png',
+    carImage: './style/img/Ford.png',
   },
   {
     brand: 'Toyota',
     logoImage:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Toyota_carlogo.svg/1200px-Toyota_carlogo.svg.png',
-    carImage:
-      './style/img/Toyota.png',
+    carImage: './style/img/Toyota.png',
   },
   {
     brand: 'BMW',
     logoImage:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/1200px-BMW.svg.png',
-    carImage:
-      './style/img/BMW.png',
+    carImage: './style/img/BMW.png',
   },
   {
     brand: 'Mercedes',
-    logoImage:
-      './style/img/mercedeslogo.webp',
-    carImage:
-      './style/img/Mercedes.png',
+    logoImage: './style/img/mercedeslogo.png',
+    carImage: './style/img/Mercedes.png',
   },
   {
     brand: 'Volkswagen',
@@ -601,4 +594,77 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.remove('modal-open'); // разрешаем скролл
     }
   });
+});
+
+// Оптимальный вариант с визуальной обратной связью
+document.addEventListener('DOMContentLoaded', function () {
+  const burger = document.getElementById('burgerMenu');
+  const menu = document.getElementById('mobileMenu');
+
+  if (burger && menu) {
+    // Текущее состояние меню
+    let isMenuOpen = false;
+
+    // Открытие/закрытие
+    burger.addEventListener('click', function () {
+      isMenuOpen = !isMenuOpen;
+      burger.classList.toggle('active', isMenuOpen);
+      menu.classList.toggle('active', isMenuOpen);
+      document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    });
+
+    // Обработка кликов по ссылкам
+    document.querySelectorAll('.mobile-nav a').forEach((link) => {
+      link.addEventListener('click', function (e) {
+        if (isMenuOpen) {
+          e.preventDefault();
+          const href = this.getAttribute('href');
+
+          // Добавляем визуальную обратную связь
+          this.classList.add('clicked');
+
+          // Закрываем меню с задержкой
+          setTimeout(() => {
+            isMenuOpen = false;
+            burger.classList.remove('active');
+            menu.classList.remove('active');
+            document.body.style.overflow = '';
+            this.classList.remove('clicked');
+
+            // Переход после закрытия меню
+            if (href) {
+              setTimeout(() => {
+                if (href.startsWith('#')) {
+                  const target = document.querySelector(href);
+                  if (target) target.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  window.location.href = href;
+                }
+              }, 50);
+            }
+          }, 250); // Задержка закрытия
+        }
+      });
+    });
+
+    // Закрытие по клику вне меню
+    menu.addEventListener('click', function (e) {
+      if (e.target === menu) {
+        isMenuOpen = false;
+        burger.classList.remove('active');
+        menu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Закрытие по Escape
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isMenuOpen) {
+        isMenuOpen = false;
+        burger.classList.remove('active');
+        menu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
 });
