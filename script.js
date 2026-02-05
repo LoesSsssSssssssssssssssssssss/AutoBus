@@ -1,37 +1,38 @@
 const carsData = [
   {
-    brand: 'Lada',
+    brand: 'Nissan',
     logoImage:
-      'https://upload.wikimedia.org/wikipedia/commons/d/d9/Lada_company_logo_image.png',
-    carImage: 'https://pngimg.com/uploads/lada/lada_PNG99.png',
+      './style/img/nissanlogo.webp',
+    carImage:
+      './style/img/Nissan.png',
   },
   {
     brand: 'Ford',
     logoImage:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Ford_Motor_Company_Logo.svg/1200px-Ford_Motor_Company_Logo.svg.png',
     carImage:
-      'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
+      './style/img/Ford.png',
   },
   {
     brand: 'Toyota',
     logoImage:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Toyota_carlogo.svg/1200px-Toyota_carlogo.svg.png',
     carImage:
-      'https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
+      './style/img/Toyota.png',
   },
   {
     brand: 'BMW',
     logoImage:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BMW.svg/1200px-BMW.svg.png',
     carImage:
-      'https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
+      './style/img/BMW.png',
   },
   {
-    brand: 'Bugatti',
+    brand: 'Mercedes',
     logoImage:
-      'https://upload.wikimedia.org/wikipedia/commons/6/60/Bugatti_logo.svg',
+      './style/img/mercedeslogo.webp',
     carImage:
-      'https://www.pngplay.com/wp-content/uploads/13/Bugatti-Veyron-Background-PNG-Image.png',
+      './style/img/Mercedes.png',
   },
   {
     brand: 'Volkswagen',
