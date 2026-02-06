@@ -2269,8 +2269,13 @@ body.modal-open {
     transform: scale(1.1);
   }
 
+  .logo {
+    width: 150px;
+    height: 97px;
+  }
+
   .main_container {
-    width: 98%;
+    width: 99%;
   }
 
   .offer_fon {
@@ -2280,9 +2285,13 @@ body.modal-open {
     background-position: center center;
   }
 
+  .offer_content {
+    margin-top: 7%;
+  }
+
   .offer_content > img {
-    width: 459px;
-    height: 91px;
+    width: 320px;
+    height: auto;
   }
 
   .logo {
@@ -2291,19 +2300,36 @@ body.modal-open {
   }
 
   .h1_offer {
-    font-size: 32px;
+    font-size: 24px;
+    text-align: center;
   }
 
   .h2_offer {
-    font-size: 22px;
+    font-size: 16px;
+    text-align: center;
   }
 
   .h3_offer {
-    font-size: 20px;
+    font-size: 14px;
   }
 
   h2 {
-    font-size: 32px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .about_us_left > h2 {
+    text-align: start;
+  }
+
+  .catalog_h2 {
+    text-align: start;
+  }
+
+  .offer_content > button {
+    width: 150px;
+    height: 40px;
+    font-size: 14px;
   }
 
   .catalog_h2 {
@@ -2311,7 +2337,8 @@ body.modal-open {
   }
 
   .about_us_left > p {
-    font-size: 16px;
+    font-size: 14px;
+    width: 100%;
   }
 
   .header_content_container {
@@ -2346,14 +2373,25 @@ body.modal-open {
   }
 
   .about_us_left > img {
-    width: 301px;
-    height: 115px;
-    margin-top: 5%;
+    display: none;
+  }
+
+  .about_us_right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .about_us_right_blockimg {
-    width: 250px;
-    height: 178px;
+    width: 150px;
+    height: 98px;
+    position: static;
+    top: 0%;
+    left: 0%;
+  }
+
+  .about_us_right_blockimg:nth-child(1) {
+    position: static;
   }
 
   .auto_bus {
@@ -2362,7 +2400,7 @@ body.modal-open {
 
   .auto_bus_content_left > p {
     font-size: 16px;
-    width: 80%;
+    width: 100%;
   }
 
   .auto_bus_content_right > p {
@@ -2375,9 +2413,26 @@ body.modal-open {
     right: 60%;
   }
 
+  .auto_bus_content_left {
+    gap: 25px;
+  }
+
+  .auto_bus_content {
+    align-items: start;
+  }
+
+  .check_right {
+    transform: scale(0.9);
+  }
+
+  .check {
+    transform: scale(0.9);
+  }
+
   .auto_bus_bg {
     width: 65%;
-    left: 38%;
+    left: 50%;
+    border-radius: 0;
   }
 
   .auto_bus_content_left_img {
@@ -2388,39 +2443,69 @@ body.modal-open {
     display: none;
   }
 
+  .car-item {
+    width: 350px;
+    height: auto;
+  }
+
   .car-item.active {
-    width: 590px;
-    height: 345px;
+    width: 350px;
+    height: auto;
+  }
+
+  .car-slider {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
+
+  .cars_ellipse {
+    width: 350px;
+    height: 210px;
+    top: 25%;
+  }
+
+  .cars_btn {
+    font-size: 14px;
+    width: 150px;
+    height: 40px;
+    top: -25%;
   }
 
   .auto_bus_content_right > img {
-    width: 330px;
-    height: 127px;
-    top: -110px;
+    width: 190px;
+    height: auto;
+    top: -60px;
+    right: -10px;
   }
 
   .auto_bus_content_left > img {
-    width: 330px;
-    height: 97px;
-    top: -80px;
+    width: 190px;
+    height: auto;
+    top: -40px;
+    left: -10px;
+  }
+
+  .catalog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .catalog_block {
-    width: 50%;
+    width: 100%;
     height: 350px;
-  }
-
-  .catalog_block > img {
-    width: 250px;
-    height: 144px;
   }
 
   .catalog_block > h3 {
     font-size: 20px;
   }
 
+  .catalog_block > img {
+    width: 200px;
+    height: auto;
+  }
+
   .catalog_list {
-    font-size: 18px;
     margin-left: 50px;
   }
 
@@ -2434,11 +2519,15 @@ body.modal-open {
   }
 
   .brand-name {
-    font-size: 20px;
+    font-size: 16px;
+  }
+
+  .brands-list {
+    column-gap: 5px;
   }
 
   .brand-name_right {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .auto_bus_content_left_img {
@@ -2460,22 +2549,24 @@ body.modal-open {
 
   .catalog_block:first-child {
     padding: 30px;
-  }
-
-  .catalog_block:last-child {
-    border-bottom-right-radius: 10px;
-  }
-
-  .catalog_block:nth-child(2) {
     border-top-right-radius: 10px;
   }
 
-  .catalog_block:nth-child(5) {
+  .catalog_block:nth-child(3) {
+    border-radius: 0px;
+  }
+
+  .catalog_block:nth-child(4) {
+    border-radius: 0px;
+  }
+
+  .catalog_block:last-child {
     border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
 
   .accordion {
-    width: 85%;
+    width: 100%;
   }
 
   .accordion-header {
@@ -2483,12 +2574,8 @@ body.modal-open {
   }
 
   .accordion-title {
-    font-size: 18px;
-    margin-left: 40px;
-  }
-
-  .why-us-container {
-    margin-top: 5%;
+    font-size: 20px;
+    margin-left: 35px;
   }
 
   .accordion-content-inner {
@@ -2496,21 +2583,19 @@ body.modal-open {
     font-size: 16px;
   }
 
+  .why-us-container {
+    flex-direction: column-reverse;
+    gap: 40px;
+    margin-top: 5%;
+  }
+
   .why-us-title {
     font-size: 32px;
   }
 
   .why-us-right {
-    width: 380px;
-    height: 380px;
-  }
-
-  .accordion-arrow {
-    font-size: 16px;
-  }
-
-  .accordion-number {
-    font-size: 24px;
+    width: 350px;
+    height: 350px;
   }
 
   .map-classes {
@@ -2521,7 +2606,7 @@ body.modal-open {
     display: flex;
     margin-top: 150px;
     width: 100%;
-    height: 400px;
+    height: 350px;
   }
 
   footer {
@@ -2538,45 +2623,31 @@ body.modal-open {
     width: 100%;
   }
 
-  .footer_title {
-    font-size: 36px;
-  }
-
-  .footer_content_container > p {
-    font-size: 28px;
-  }
-
-  .footer_content_container > h3 {
-    font-size: 24px;
-  }
-
-  .footer_bottom > .main_container > p {
-    font-size: 14px;
-  }
-
   .footer_content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto;
-    gap: 25px;
+    gap: 10px;
     width: 100%;
     justify-content: space-between;
-    margin-top: 25px;
-  }
-
-  .footer_img {
-    margin-top: 0px;
-  }
-
-  .footer_img > a > img {
-    width: 45px;
-    height: 45px;
   }
 
   .footer_content_container:nth-child(1) {
     grid-column: 1;
     grid-row: 1;
     justify-self: start;
+  }
+
+  .footer_title {
+    font-size: 32px;
+  }
+
+  .footer_content_container > p {
+    font-size: 20px;
+  }
+
+  .footer_content_container > h3 {
+    font-size: 16px;
   }
 
   .footer_content_container:nth-child(2) {
@@ -2597,6 +2668,15 @@ body.modal-open {
     grid-row: 2;
     justify-self: end;
     text-align: right;
+  }
+
+  .footer_bottom > .main_container > p {
+    font-size: 12px;
+  }
+
+  .footer_img > a > img {
+    width: 35px;
+    height: 35px;
   }
 
   .footer_img {
