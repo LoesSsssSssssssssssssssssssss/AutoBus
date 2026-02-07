@@ -2116,6 +2116,7 @@ body.modal-open {
     padding: 100px 30px 40px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
     overflow-y: auto; /* Прокрутка только если контент не помещается */
     -webkit-overflow-scrolling: touch;
@@ -2126,7 +2127,6 @@ body.modal-open {
     display: flex;
     flex-direction: column;
     gap: 15px; /* Уменьшаем отступы */
-    margin-bottom: 20px;
     flex-shrink: 1; /* Может сжиматься при необходимости */
   }
 
@@ -2152,7 +2152,6 @@ body.modal-open {
     display: flex;
     flex-direction: column;
     gap: 15px; /* Уменьшаем отступы */
-    padding-top: 20px;
     flex-shrink: 1; /* Может сжиматься */
   }
 
@@ -2184,7 +2183,6 @@ body.modal-open {
     justify-content: center;
     padding-top: 20px;
     border-top: 2px solid #f0f0f0;
-    margin-top: auto; /* Прижимаем к низу */
     padding-bottom: 20px; /* Отступ от края экрана */
     flex-shrink: 0; /* Не сжимается */
   }
@@ -2266,6 +2264,14 @@ body.modal-open {
     font-size: 32px;
   }
 
+  .catalog_block:first-child {
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .catalog_btn {
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
+  }
+
   .about_us_left > p {
     font-size: 16px;
     width: 100%;
@@ -2324,6 +2330,10 @@ body.modal-open {
 
   .about_us_right_blockimg:nth-child(1) {
     position: static;
+  }
+
+  .all_models {
+    margin-top: 10%;
   }
 
   .auto_bus {
@@ -2404,6 +2414,10 @@ body.modal-open {
     margin-top: 5%;
   }
 
+  .car-slider {
+    margin-top: 10%;
+  }
+
   .cars-container {
     height: 260px;
   }
@@ -2421,7 +2435,7 @@ body.modal-open {
     width: 370px;
     height: 200px;
     top: 23%;
-    box-shadow: 1px 1px 15px 1px rgba(255, 127, 67, 0.3);
+    box-shadow: 1px 1px 10px 1px rgba(255, 127, 67, 0.3);
   }
 
   .cars_btn {
@@ -2449,6 +2463,7 @@ body.modal-open {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10%;
   }
 
   .catalog_block {
@@ -2543,6 +2558,10 @@ body.modal-open {
     font-size: 16px;
   }
 
+  .why-us-section {
+    margin-top: 10%;
+  }
+
   .why-us-container {
     flex-direction: column-reverse;
     gap: 40px;
@@ -2565,9 +2584,9 @@ body.modal-open {
 
   .map-classes-phone {
     display: flex;
-    margin-top: 150px;
+    margin-top: 10%;
     width: 100%;
-    height: 350px;
+    height: 400px;
   }
 
   footer {
@@ -2601,14 +2620,17 @@ body.modal-open {
 
   .footer_title {
     font-size: 32px;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
   }
 
   .footer_content_container > p {
     font-size: 20px;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
   }
 
   .footer_content_container > h3 {
     font-size: 16px;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
   }
 
   .footer_content_container:nth-child(2) {
