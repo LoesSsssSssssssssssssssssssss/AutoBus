@@ -668,3 +668,46 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+// Добавьте этот код в ваш script.js
+function adjustMobileMenuHeight() {
+  const mobileMenuContent = document.querySelector('.mobile-menu-content');
+  if (!mobileMenuContent) return;
+
+  const headerHeight = 100; // Высота шапки
+  const bottomPadding = 40; // Отступ снизу
+  const socialHeight = 75; // Высота блока с соцсетями
+  const availableHeight =
+    window.innerHeight - headerHeight - bottomPadding - socialHeight;
+
+  // Устанавливаем максимальную высоту для основного контента
+  const nav = document.querySelector('.mobile-nav');
+  const contacts = document.querySelector('.mobile-contacts');
+
+  if (nav && contacts) {
+    const contentHeight = nav.offsetHeight + contacts.offsetHeight + 60; // + отступы
+
+    if (contentHeight > availableHeight) {
+      // Если контент не помещается, добавляем прокрутку
+      mobileMenuContent.style.maxHeight = '100vh';
+      mobileMenuContent.style.overflowY = 'auto';
+    } else {
+      // Если помещается, убираем прокрутку
+      mobileMenuContent.style.maxHeight = 'none';
+      mobileMenuContent.style.overflowY = 'visible';
+    }
+  }
+}
+
+// Вызываем при открытии меню и изменении размера окна
+document.addEventListener('DOMContentLoaded', function () {
+  const burger = document.getElementById('burgerMenu');
+
+  if (burger) {
+    burger.addEventListener('click', function () {
+      setTimeout(adjustMobileMenuHeight, 100); // Через 100мс после открытия
+    });
+  }
+
+  window.addEventListener('resize', adjustMobileMenuHeight);
+});
