@@ -2435,7 +2435,7 @@ body.modal-open {
     width: 370px;
     height: 200px;
     top: 23%;
-    box-shadow: 1px 1px 10px 1px rgba(255, 127, 67, 0.3);
+    box-shadow: none;
   }
 
   .cars_btn {
