@@ -1729,6 +1729,49 @@ body.modal-open {
     font-size: 32px;
   }
 
+  .modal-window {
+    width: 720px;
+    height: auto;
+  }
+
+  .modal-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 15px 10px 15px;
+  }
+
+  .modal-right {
+    padding: 10px 20px 10px 20px;
+  }
+
+  .modal-right input {
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .modal-left h2 {
+    font-size: 32px;
+  }
+
+  .modal-steps li {
+    font-size: 16px;
+  }
+
+  .modal-phones-container > p {
+    font-size: 18px;
+  }
+
+  .modal-phones-container > img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .modal-steps li::before {
+    width: 8px;
+    height: 8px;
+  }
+
   .catalog_h2 {
     font-size: 32px;
   }
@@ -2246,6 +2289,71 @@ body.modal-open {
     text-align: center;
   }
 
+  .modal-window {
+    width: 360px;
+    height: auto;
+    flex-direction: column;
+  }
+
+  .modal-left {
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+  }
+
+  .modal-right {
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    gap: 5px;
+  }
+
+  .modal-right label {
+    font-size: 14px;
+  }
+
+  .modal-right input {
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .modal-checkbox span {
+    font-size: 10px;
+  }
+
+  .modal-bottom_button {
+    justify-content: center;
+  }
+
+  .modal-bottom {
+    margin-top: 3%;
+  }
+
+  .modal-left h2 {
+    font-size: 22px;
+  }
+
+  .modal-steps li {
+    font-size: 16px;
+  }
+
+  .modal-phones-container > p {
+    font-size: 16px;
+  }
+
+  .modal-phones-container > img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .modal-steps li::before {
+    width: 8px;
+    height: 8px;
+  }
+
+  .modal-icons > a > img {
+    width: 25px;
+    height: 25px;
+  }
+
   .about_us_left > h2 {
     text-align: start;
   }
@@ -2416,6 +2524,14 @@ body.modal-open {
 
   .car-slider {
     margin-top: 10%;
+  }
+
+  .logo-item.right-1 {
+    transform: translateX(140px) scale(0.8);
+  }
+
+  .logo-item.left-1 {
+    transform: translateX(-140px) scale(0.8);
   }
 
   .cars-container {
