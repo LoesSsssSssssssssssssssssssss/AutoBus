@@ -574,11 +574,14 @@ document.addEventListener('keydown', (e) => {
 
 document.addEventListener('DOMContentLoaded', () => {
   const modalOverlay = document.getElementById('modalOverlay');
-  const modalOpenBtn = document.querySelector('[data-modal-open]');
+  const modalOpenBtns = document.querySelectorAll('[data-modal-open]');
 
-  modalOpenBtn.addEventListener('click', () => {
-    modalOverlay.classList.add('active');
-    document.body.classList.add('modal-open'); // блокируем скролл
+  // Добавляем обработчик ко всем кнопкам
+  modalOpenBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      modalOverlay.classList.add('active');
+      document.body.classList.add('modal-open'); // блокируем скролл
+    });
   });
 
   modalOverlay.addEventListener('click', (e) => {
@@ -710,4 +713,112 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   window.addEventListener('resize', adjustMobileMenuHeight);
+});
+
+// === ПЛАВНАЯ ПРОКРУТКА ПО ЯКОРНЫМ ССЫЛКАМ ===
+document.addEventListener('DOMContentLoaded', function () {
+  // Отключаем стандартное поведение только для якорных ссылок
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+
+      // Пропускаем ссылки без # или на саму страницу
+      if (href === '#' || href === '') return;
+
+      // Исключаем ссылки с data-modal-open
+      if (this.hasAttribute('data-modal-open')) return;
+
+      e.preventDefault();
+
+      const targetElement = document.querySelector(href);
+      if (!targetElement) return;
+
+      // Получаем текущую позицию скролла
+      const startPosition = window.pageYOffset;
+      const targetPosition =
+        targetElement.getBoundingClientRect().top + startPosition;
+      const distance = targetPosition - startPosition;
+      const duration = 800; // 800ms для плавности
+      let startTime = null;
+
+      // Функция анимации скролла
+      function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const run = ease(timeElapsed, startPosition, distance, duration);
+        window.scrollTo(0, run);
+
+        if (timeElapsed < duration) {
+          requestAnimationFrame(animation);
+        }
+      }
+
+      // Функция плавности (easeInOutCubic)
+      function ease(t, b, c, d) {
+        t /= d / 2;
+        if (t < 1) return (c / 2) * t * t * t + b;
+        t -= 2;
+        return (c / 2) * (t * t * t + 2) + b;
+      }
+
+      // Запускаем анимацию
+      requestAnimationFrame(animation);
+
+      // Обновляем URL без скролла
+      history.replaceState(null, null, href);
+    });
+  });
+
+  // Обработка для мобильного меню
+  document.querySelectorAll('.mobile-nav a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href === '#' || href === '') return;
+
+      e.preventDefault();
+
+      // Закрываем мобильное меню
+      const burger = document.getElementById('burgerMenu');
+      const menu = document.getElementById('mobileMenu');
+      if (burger && menu && menu.classList.contains('active')) {
+        burger.classList.remove('active');
+        menu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      // Даем время на закрытие меню перед скроллом
+      setTimeout(() => {
+        const targetElement = document.querySelector(href);
+        if (targetElement) {
+          const startPosition = window.pageYOffset;
+          const targetPosition =
+            targetElement.getBoundingClientRect().top + startPosition;
+          const distance = targetPosition - startPosition;
+          const duration = 800;
+          let startTime = null;
+
+          function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = ease(timeElapsed, startPosition, distance, duration);
+            window.scrollTo(0, run);
+
+            if (timeElapsed < duration) {
+              requestAnimationFrame(animation);
+            }
+          }
+
+          function ease(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return (c / 2) * t * t * t + b;
+            t -= 2;
+            return (c / 2) * (t * t * t + 2) + b;
+          }
+
+          requestAnimationFrame(animation);
+          history.replaceState(null, null, href);
+        }
+      }, 300); // Ждем закрытия меню
+    });
+  });
 });
