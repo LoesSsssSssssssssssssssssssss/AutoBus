@@ -411,12 +411,12 @@ const whyUsData = [
 
 // Изображения для слайдера
 const slidesImages = [
-  './style/img/why-us-1.jpg',
-  './style/img/why-us-2.jpg',
-  './style/img/why-us-3.jpg',
-  './style/img/why-us-4.jpg',
-  './style/img/why-us-5.jpg',
-  './style/img/why-us-6.jpg',
+  './style/img/slide1.jpg',
+  './style/img/slide2.jpg',
+  './style/img/slide3.jpg',
+  './style/img/slide4.jpg',
+  './style/img/slide5.jpg',
+  './style/img/slide6.jpg',
 ];
 
 // Инициализация блока "Почему именно мы"

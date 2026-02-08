@@ -260,21 +260,21 @@ h2 > span {
 }
 
 .about_us_right_blockimg:nth-child(1) {
-  background-image: url('./img/about1.webp');
+  background-image: url('./img/photo1.jpg');
   position: relative;
   z-index: 1;
   top: 12%;
 }
 
 .about_us_right_blockimg:nth-child(2) {
-  background-image: url('./img/about2.webp');
+  background-image: url('./img/photo2.jpg');
   position: relative;
   z-index: 2;
   right: 75%;
 }
 
 .about_us_right_blockimg:nth-child(3) {
-  background-image: url('./img/about3.webp');
+  background-image: url('./img/photo3.jpg');
   position: relative;
   z-index: 3;
   bottom: 12%;
@@ -2292,7 +2292,7 @@ body.modal-open {
   .modal-window {
     width: 360px;
     height: auto;
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 
   .modal-left {
@@ -2302,7 +2302,7 @@ body.modal-open {
 
   .modal-right {
     width: 100%;
-    padding: 10px 10px 10px 10px;
+    padding: 15px 15px 15px 15px;
     gap: 5px;
   }
 
@@ -2328,7 +2328,7 @@ body.modal-open {
   }
 
   .modal-left h2 {
-    font-size: 22px;
+    display: none;
   }
 
   .modal-steps li {
