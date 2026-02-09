@@ -2793,3 +2793,741 @@ body.modal-open {
     gap: 11px;
   }
 }
+
+@media (min-width: 300px) and (max-width: 359px) {
+  .header_content {
+    align-items: center;
+    padding: 15px 0;
+    position: relative;
+  }
+
+  .logo {
+    width: 120px;
+    height: auto;
+  }
+
+  /* Скрываем обычное меню на мобильных */
+  .header_content_container {
+    display: none !important;
+  }
+
+  /* Показываем бургер-меню на мобильных */
+  .burger-menu {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1003;
+  }
+
+  .burger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* Симметричный крестик */
+  .burger-menu.active span:nth-child(1) {
+    transform: translateY(12px) rotate(45deg);
+    background-color: #f07e07;
+  }
+
+  .burger-menu.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .burger-menu.active span:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+    background-color: #f07e07;
+  }
+
+  .mobile-menu {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh; /* Занимает всю высоту экрана */
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(5px);
+    z-index: 1001;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden; /* Убираем прокрутку */
+  }
+
+  .mobile-menu.active {
+    right: 0;
+  }
+
+  .mobile-menu-content {
+    background: #fff;
+    width: 85%;
+    height: 100vh; /* Занимает всю высоту */
+    margin-left: auto;
+    padding: 100px 30px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+    overflow-y: auto; /* Прокрутка только если контент не помещается */
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Делаем контент адаптивным */
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Уменьшаем отступы */
+    flex-shrink: 1; /* Может сжиматься при необходимости */
+  }
+
+  .mobile-nav a {
+    font-size: 20px; /* Немного уменьшаем шрифт */
+    font-family: 'Raleway SemiBold';
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    padding: 8px 0; /* Уменьшаем padding */
+    border-bottom: 2px solid #f0f0f0;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-nav a:hover {
+    color: #f07e07;
+    border-bottom-color: #f07e07;
+    transform: translateX(10px);
+  }
+
+  /* Контакты */
+  .mobile-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Уменьшаем отступы */
+    flex-shrink: 1; /* Может сжиматься */
+  }
+
+  .mobile-contact-item {
+    display: flex;
+    align-items: flex-start; /* Выравнивание по верху */
+    gap: 10px;
+  }
+
+  .mobile-contact-item img {
+    width: 20px; /* Уменьшаем иконки */
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 2px; /* Выравнивание иконки */
+  }
+
+  .mobile-contact-item h5 {
+    font-size: 14px; /* Уменьшаем текст */
+    font-family: 'PT Sans Regular';
+    font-weight: 400;
+    color: #333;
+    line-height: 1.3; /* Уменьшаем межстрочный интервал */
+  }
+
+  /* Социальные сети */
+  .mobile-social {
+    display: flex;
+    gap: 15px; /* Уменьшаем отступы */
+    justify-content: center;
+    padding-top: 20px;
+    border-top: 2px solid #f0f0f0;
+    padding-bottom: 20px; /* Отступ от края экрана */
+    flex-shrink: 0; /* Не сжимается */
+  }
+
+  .mobile-social a img {
+    width: 35px; /* Уменьшаем иконки */
+    height: 35px;
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-social a:hover img {
+    transform: scale(1.1);
+  }
+
+  .logo {
+    width: 150px;
+    height: 97px;
+  }
+
+  .main_container {
+    width: 99%;
+  }
+
+  .offer_fon {
+    background-image: url('./img/fon_mobile.png');
+    height: 650px;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .offer_content {
+    margin-top: 7%;
+  }
+
+  .offer_content > img {
+    width: 290px;
+    height: auto;
+  }
+
+  .logo {
+    width: 150px;
+    height: 97px;
+  }
+
+  .h1_offer {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .h2_offer {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .h3_offer {
+    font-size: 12px;
+  }
+
+  .offer_advantages {
+    gap: 15px;
+  }
+
+  .offer_advantages > div > img {
+    width: 25px;
+    height: 22px;
+  }
+
+  h2 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .modal-window {
+    width: 360px;
+    height: auto;
+  }
+
+  .modal-left {
+    display: none;
+  }
+
+  .modal-right {
+    width: 100%;
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .modal-right label {
+    font-size: 14px;
+  }
+
+  .modal-right input {
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .modal-checkbox span {
+    font-size: 10px;
+  }
+
+  .modal-bottom_button {
+    justify-content: center;
+  }
+
+  .modal-bottom {
+    margin-top: 3%;
+  }
+
+  .modal-left h2 {
+    display: none;
+  }
+
+  .modal-steps li {
+    font-size: 16px;
+  }
+
+  .modal-phones-container > p {
+    font-size: 16px;
+  }
+
+  .modal-phones-container > img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .modal-steps li::before {
+    width: 8px;
+    height: 8px;
+  }
+
+  .modal-icons > a > img {
+    width: 25px;
+    height: 25px;
+  }
+
+  .about_us_left > h2 {
+    text-align: start;
+  }
+
+  .catalog_h2 {
+    text-align: center;
+  }
+
+  .offer_content > button {
+    width: 150px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .catalog_h2 {
+    font-size: 28px;
+  }
+
+  .catalog_text {
+    font-size: 18px;
+  }
+
+  .catalog_block:first-child {
+    align-items: center;
+    text-align: center;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .catalog_btn {
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .about_us_left > p {
+    font-size: 16px;
+    width: 100%;
+  }
+
+  .header_content_container {
+    gap: 10px;
+    width: 75%;
+  }
+
+  .header_content_container_left {
+    gap: 10px;
+  }
+
+  .header_content_container_left > div > img {
+    width: 12px;
+    height: 10px;
+  }
+
+  .header_content_container_left > div > h5 {
+    font-size: 10px;
+  }
+
+  .header_content_container_down > a {
+    font-size: 16px;
+  }
+
+  .header_content_container_right > a > img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .about_us {
+    margin-top: 5%;
+    flex-direction: column;
+  }
+
+  .about_us_left > img {
+    display: none;
+  }
+
+  .about_us_right {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 5%;
+  }
+
+  .about_us_right_blockimg {
+    width: 100%;
+    height: 300px;
+    position: static;
+    top: 0%;
+    left: 0%;
+  }
+
+  .about_us_right_blockimg:nth-child(1) {
+    position: static;
+  }
+
+  .all_models {
+    margin-top: 10%;
+  }
+
+  .auto_bus {
+    height: 450px;
+  }
+
+  .auto_bus_content_left > p {
+    font-size: 16px;
+    width: 100%;
+  }
+
+  .auto_bus_content_right > p {
+    font-size: 16px;
+    width: 100%;
+    margin-left: 1%;
+  }
+
+  .about_us_right_blockimg:nth-child(2) {
+    right: 60%;
+  }
+
+  .auto_bus_content_left {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .auto_bus_content {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .check_right {
+    transform: scale(0.9);
+  }
+
+  .check {
+    transform: scale(0.9);
+  }
+
+  .auto_bus_bg {
+    width: 100%;
+    height: 60%;
+    top: 48%;
+    left: 0px;
+    border-radius: 0;
+  }
+
+  .auto_bus_content_left_img {
+    display: none;
+  }
+
+  .brands_container_right_img {
+    display: none;
+  }
+
+  .car-item {
+    width: 380px;
+    height: auto;
+  }
+
+  .logo-item {
+    width: 70px;
+    height: 70px;
+  }
+
+  .logo-item.active {
+    width: 100px;
+    height: 100px;
+  }
+
+  .car-item.active {
+    width: 320px;
+    height: auto;
+  }
+
+  .brand-title {
+    font-size: 32px;
+  }
+
+  .logos-section {
+    height: 150px;
+    margin-top: 5%;
+  }
+
+  .car-slider {
+    margin-top: 10%;
+  }
+
+  .logo-item.right-1 {
+    transform: translateX(110px) scale(0.8);
+  }
+
+  .logo-item.left-1 {
+    transform: translateX(-110px) scale(0.8);
+  }
+
+  .cars-container {
+    height: 260px;
+  }
+
+  .cars-section {
+    height: 370px;
+  }
+
+  .car-slider {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+  }
+
+  .cars_ellipse {
+    width: 340px;
+    height: 180px;
+    top: 23%;
+    box-shadow: none;
+  }
+
+  .cars_btn {
+    font-size: 14px;
+    width: 150px;
+    height: 40px;
+    top: -25%;
+  }
+
+  .auto_bus_content_right {
+    padding-top: 15%;
+    margin-top: 10%;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .auto_bus_content_right > img {
+    width: 180px;
+    height: auto;
+    top: 43%;
+    right: -10px;
+  }
+
+  .auto_bus_content_left > img {
+    width: 180px;
+    height: auto;
+    top: -40px;
+    left: -10px;
+  }
+
+  .catalog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+  }
+
+  .catalog_block {
+    width: 100%;
+    height: 350px;
+  }
+
+  .catalog_block > h3 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .catalog_block > img {
+    width: 200px;
+    height: auto;
+  }
+
+  .catalog_list {
+    margin-left: 50px;
+  }
+
+  .catalog_block > hr {
+    width: 85%;
+  }
+
+  .brands_container_right_img {
+    width: 183px;
+    height: 92px;
+  }
+
+  .brand-name {
+    font-size: 16px;
+  }
+
+  .brands-list {
+    column-gap: 5px;
+  }
+
+  .brand-name_right {
+    font-size: 16px;
+  }
+
+  .auto_bus_content_left_img {
+    width: 212px;
+    height: 81px;
+  }
+
+  .brands-list_right {
+    margin-left: 1%;
+  }
+
+  .car-item.left {
+    transform: translateX(-450px) scale(0.7);
+  }
+
+  .car-item.right {
+    transform: translateX(450px) scale(0.7);
+  }
+
+  .catalog_block:first-child {
+    padding: 30px;
+    border-top-right-radius: 10px;
+  }
+
+  .catalog_block:nth-child(3) {
+    border-radius: 0px;
+  }
+
+  .catalog_block:nth-child(4) {
+    border-radius: 0px;
+  }
+
+  .catalog_block:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .accordion {
+    width: 100%;
+  }
+
+  .accordion-header {
+    padding: 5px;
+  }
+
+  .accordion-title {
+    font-size: 20px;
+    margin-left: 35px;
+  }
+
+  .accordion-content-inner {
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .why-us-section {
+    margin-top: 10%;
+  }
+
+  .why-us-container {
+    flex-direction: column-reverse;
+    gap: 40px;
+    margin-top: 5%;
+  }
+
+  .why-us-title {
+    font-size: 22px;
+  }
+
+  .why-us-right {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .map-classes {
+    display: none;
+  }
+
+  .map-classes-phone {
+    display: flex;
+    margin-top: 10%;
+    width: 100%;
+    height: 400px;
+  }
+
+  footer {
+    margin-top: 0px;
+  }
+
+  footer > .main_container {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+
+  .footer_left {
+    width: 100%;
+  }
+
+  .footer_content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .footer_content_container:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+  }
+
+  .footer_title {
+    font-size: 28px;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .footer_content_container > p {
+    font-size: 18px;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .footer_content_container > h3 {
+    font-size: 16px;
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .footer_content_container:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+  }
+
+  .footer_content_container:nth-child(3) {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    text-align: right;
+  }
+
+  .footer_content_container:nth-child(4) {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+    text-align: right;
+  }
+
+  .footer_bottom > .main_container > p {
+    font-size: 10px;
+  }
+
+  .footer_img > a > img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .footer_img {
+    grid-column: 1;
+    grid-row: 3;
+    display: flex;
+    justify-content: start;
+    gap: 11px;
+  }
+}
