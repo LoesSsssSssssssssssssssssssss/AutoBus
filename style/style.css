@@ -445,7 +445,7 @@ h2 > span {
   font-weight: 700;
   cursor: pointer;
   position: relative;
-  z-index: 9;
+  z-index: 99;
   order: 2;
 }
 
