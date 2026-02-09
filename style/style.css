@@ -2452,18 +2452,18 @@ body.modal-open {
   }
 
   .auto_bus {
-    height: 300px;
+    height: 470px;
   }
 
   .auto_bus_content_left > p {
-    font-size: 16px;
+    font-size: 18px;
     width: 100%;
   }
 
   .auto_bus_content_right > p {
-    font-size: 16px;
+    font-size: 18px;
     width: 100%;
-    margin-left: 6%;
+    margin-left: 1%;
   }
 
   .about_us_right_blockimg:nth-child(2) {
@@ -2471,10 +2471,12 @@ body.modal-open {
   }
 
   .auto_bus_content_left {
-    gap: 25px;
+    width: 100%;
+    gap: 10px;
   }
 
   .auto_bus_content {
+    flex-direction: column;
     align-items: start;
   }
 
@@ -2487,8 +2489,10 @@ body.modal-open {
   }
 
   .auto_bus_bg {
-    width: 65%;
-    left: 50%;
+    width: 100%;
+    height: 60%;
+    top: 48%;
+    left: 0px;
     border-radius: 0;
   }
 
@@ -2569,14 +2573,21 @@ body.modal-open {
   }
 
   .auto_bus_content_right > img {
-    width: 180px;
+    width: 210px;
     height: auto;
-    top: -60px;
+    top: 39%;
     right: -10px;
   }
 
+  .auto_bus_content_right {
+    padding-top: 8%;
+    margin-top: 8%;
+    width: 100%;
+    gap: 10px;
+  }
+
   .auto_bus_content_left > img {
-    width: 180px;
+    width: 210px;
     height: auto;
     top: -40px;
     left: -10px;
@@ -2617,7 +2628,7 @@ body.modal-open {
   }
 
   .brand-name {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .brands-list {
@@ -2625,7 +2636,7 @@ body.modal-open {
   }
 
   .brand-name_right {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .auto_bus_content_left_img {
@@ -2634,7 +2645,7 @@ body.modal-open {
   }
 
   .brands-list_right {
-    margin-left: 5%;
+    margin-left: 1%;
   }
 
   .car-item.left {
@@ -3178,16 +3189,16 @@ body.modal-open {
   }
 
   .auto_bus {
-    height: 450px;
+    height: 470px;
   }
 
   .auto_bus_content_left > p {
-    font-size: 16px;
+    font-size: 18px;
     width: 100%;
   }
 
   .auto_bus_content_right > p {
-    font-size: 16px;
+    font-size: 18px;
     width: 100%;
     margin-left: 1%;
   }
