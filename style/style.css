@@ -3542,3 +3542,82 @@ body.modal-open {
     gap: 11px;
   }
 }
+
+/* Стили для формы */
+.error-message {
+  color: #ff4444;
+  font-size: 12px;
+  margin-top: 3px;
+  min-height: 16px;
+  font-family: 'PT Sans Regular';
+  display: none;
+}
+
+.success-message {
+  color: #4caf50;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+  font-family: 'PT Sans Regular';
+  padding: 10px;
+  background-color: #f0fff0;
+  border-radius: 5px;
+  border: 1px solid #4caf50;
+}
+
+.modal-right input.error {
+  border: 1px solid #ff4444 !important;
+  background-color: #fff8f8;
+}
+
+.modal-right input.valid {
+  border: 1px solid #4caf50 !important;
+}
+
+.modal-checkbox.error span::before {
+  border: 1px solid #ff4444;
+  background-color: #fff8f8;
+}
+
+.modal-checkbox.valid span::before {
+  border: 1px solid #4caf50;
+}
+
+/* Стили для кнопки загрузки */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(240, 126, 7, 0.3);
+  border-radius: 50%;
+  border-top-color: #f07e07;
+  animation: spin 1s ease-in-out infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Адаптивные стили для формы */
+@media (max-width: 720px) {
+  .modal-right {
+    padding: 15px;
+  }
+
+  .modal-right input {
+    font-size: 16px;
+    height: 42px;
+  }
+
+  .error-message {
+    font-size: 11px;
+  }
+}

@@ -491,32 +491,80 @@
         </div>
 
         <!-- Правая часть -->
-        <div class="modal-right">
-          <label>Как к Вам обращаться?</label>
-          <input placeholder="Имя" />
+        <form id="modalForm" class="modal-right">
+          <label for="name">Как к Вам обращаться? *</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Имя"
+            required
+            maxlength="50"
+          />
+          <div class="error-message" id="nameError"></div>
 
-          <label>Ваш номер телефона</label>
-          <input placeholder="+7(XXX)XXX-XX-XX" />
+          <label for="phone">Ваш номер телефона *</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="+7(XXX)XXX-XX-XX"
+            required
+            maxlength="20"
+          />
+          <div class="error-message" id="phoneError"></div>
 
-          <label>VIN</label>
-          <input placeholder="VIN автомобиля" />
+          <label for="vin">VIN</label>
+          <input
+            type="text"
+            id="vin"
+            name="vin"
+            placeholder="VIN автомобиля"
+            maxlength="17"
+          />
+          <div class="error-message" id="vinError"></div>
 
-          <label>Что для Вас подобрать?</label>
-          <input placeholder="Название запчасти" />
+          <label for="part">Что для Вас подобрать?</label>
+          <input
+            type="text"
+            id="part"
+            name="part"
+            placeholder="Название запчасти"
+            maxlength="200"
+          />
+          <div class="error-message" id="partError"></div>
 
           <div class="modal-bottom">
             <div class="checkbox">
               <label class="modal-checkbox">
-                <input type="checkbox" />
-                <span>Согласие на обработку персональных данных</span>
+                <input
+                  type="checkbox"
+                  id="agreement"
+                  name="agreement"
+                  required
+                />
+                <span>Согласие на обработку персональных данных *</span>
               </label>
+              <div class="error-message" id="agreementError"></div>
             </div>
 
             <div class="modal-bottom_button">
-              <button>Подобрать запчасть</button>
+              <button type="submit" id="submitBtn" class="submit-btn">
+                Подобрать запчасть
+              </button>
+              <div
+                class="loading-spinner"
+                id="loadingSpinner"
+                style="display: none"
+              ></div>
             </div>
+            <div
+              class="success-message"
+              id="successMessage"
+              style="display: none"
+            ></div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
 
