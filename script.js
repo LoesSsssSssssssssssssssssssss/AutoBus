@@ -708,7 +708,6 @@ function validateField(field) {
   const fieldId = field.id;
   const errorElement = document.getElementById(`${fieldId}Error`);
 
-  // Очищаем предыдущую ошибку
   if (errorElement) {
     errorElement.style.display = 'none';
     errorElement.textContent = '';
@@ -724,10 +723,10 @@ function validateField(field) {
         errorMessage = 'Введите ваше имя';
         isValid = false;
       } else if (value.length < 2) {
-        errorMessage = 'Имя должно содержать минимум 2 символа';
+      errorMessage = 'Имя должно содержать минимум 2 символа';
         isValid = false;
-      } else if (!/^[а-яА-ЯёЁa-zA-Z\s\-]+$/u.test(value)) {
-        errorMessage = 'Имя может содержать только буквы, пробелы и дефисы';
+      } else if (!/^[А-Яа-яЁё\s-]+$/.test(value)) {
+        errorMessage = 'Имя может содержать только кириллицу, пробел и тире';
         isValid = false;
       }
       break;
@@ -738,69 +737,60 @@ function validateField(field) {
         isValid = false;
       } else {
         const phoneDigits = value.replace(/\D/g, '');
-        // Проверяем что номер начинается с 7 или 8 и имеет 11 цифр
         if (phoneDigits.length !== 11 || !/^[78]/.test(phoneDigits)) {
-          errorMessage =
-            'Введите корректный номер телефона (например: +7(999)123-45-67)';
+          errorMessage = 'Введите корректный номер телефона (например: +7(999)123-45-67)';
           isValid = false;
         }
       }
       break;
 
     case 'vin':
-      if (value && !/^[A-HJ-NPR-Z0-9]{17}$/i.test(value)) {
-        errorMessage = 'VIN должен содержать 17 символов (буквы и цифры)';
+      if (value && value.length !== 17) {
+        errorMessage = 'VIN должен содержать ровно 17 символов (латиница и цифры, без I, O, Q)';
         isValid = false;
       }
       break;
+
 
     case 'part':
-      if (value && value.length > 200) {
-        errorMessage = 'Описание не должно превышать 200 символов';
+      if (value && !/^[А-Яа-яЁё0-9\s\-.,()]+$/.test(value)) {
+        errorMessage = 'Допустимы: кириллица, цифры, пробел, тире, точка, запятая и скобки';
         isValid = false;
       }
       break;
+
 
     case 'agreement':
-      if (!value) {
-        // для чекбокса value будет true/false
-        errorMessage = 'Необходимо согласие на обработку персональных данных';
+      if (!field.checked) {
+        errorMessage = 'Для отправки формы необходимо согласие на обработку персональных данных';
         isValid = false;
       }
       break;
+
   }
 
-  // Показываем ошибку если есть
-  if (!isValid && errorElement) {
-    errorElement.textContent = errorMessage;
-    errorElement.style.display = 'block';
-    field.classList.add('error');
-  } // В функции validateField, после строк field.classList.add('error');
-  if (!isValid && errorElement) {
-    errorElement.textContent = errorMessage;
-    errorElement.style.display = 'block';
-    field.classList.add('error');
+if (!isValid && errorElement) {
 
-    // Для чекбокса добавляем класс к родительскому label
-    if (fieldId === 'agreement') {
-      const checkboxLabel = field.closest('.modal-checkbox');
-      if (checkboxLabel) {
-        checkboxLabel.classList.add('error');
-        checkboxLabel.classList.remove('valid');
-      }
-    }
-  } else if (isValid && value) {
-    if (field.type !== 'checkbox') {
-      field.classList.add('valid');
-    } else if (fieldId === 'agreement') {
-      // Для чекбокса добавляем valid к label
-      const checkboxLabel = field.closest('.modal-checkbox');
-      if (checkboxLabel) {
-        checkboxLabel.classList.add('valid');
-        checkboxLabel.classList.remove('error');
-      }
-    }
+  // Чекбокс agreement подсвечиваем ТОЛЬКО после попытки отправки
+  if (fieldId !== 'agreement' || formWasSubmitted) {
+    errorElement.textContent = errorMessage;
+    errorElement.style.display = 'block';
   }
+
+  field.classList.add('error');
+
+} else if (isValid) {
+
+  if (errorElement) {
+    errorElement.style.display = 'none';
+  }
+
+  field.classList.remove('error');
+  field.classList.add('valid');
+}
+
+  
+  return isValid;
 }
 
 // Маска телефона
@@ -841,28 +831,51 @@ function initVINUppercase() {
   if (!vinInput) return;
 
   vinInput.addEventListener('input', function () {
-    this.value = this.value.toUpperCase().replace(/\s/g, '');
+    let value = this.value.toUpperCase();
+
+    // Удаляем кириллицу и запрещённые буквы I O Q
+    value = value.replace(/[^A-HJ-NPR-Z0-9]/g, '');
+
+    this.value = value.substring(0, 17);
   });
 }
 
 // Валидация всей формы
+let formWasSubmitted = false;
+
 function validateForm() {
   let isValid = true;
-
   const fields = ['name', 'phone', 'vin', 'part', 'agreement'];
+  
   fields.forEach((fieldId) => {
     const field = document.getElementById(fieldId);
     if (field && !validateField(field)) {
       isValid = false;
     }
   });
-
+  
   return isValid;
 }
 
 // Инициализация обработчиков формы
 function initFormValidation() {
+  console.log('✅ initFormValidation вызвана!');
   const modalForm = document.getElementById('modalForm');
+  console.log('✅ Форма найдена:', modalForm);
+
+  const agreementCheckbox = document.getElementById('agreement');
+  const agreementLabel = agreementCheckbox.closest('.modal-checkbox');
+
+  agreementCheckbox.addEventListener('change', function () {
+    if (this.checked) {
+      agreementLabel.classList.add('valid');
+      agreementLabel.classList.remove('error');
+      document.getElementById('agreementError').style.display = 'none';
+    } else {
+      agreementLabel.classList.remove('valid');
+    }
+  });
+  
   if (!modalForm) return;
 
   // Инициализация масок
@@ -884,18 +897,24 @@ function initFormValidation() {
     });
   });
 
-  // Обработка отправки формы
+  // Обработка отправки формы (ОДИН РАЗ!)
   modalForm.addEventListener('submit', async function (e) {
     e.preventDefault();
+    console.log('✅ ФОРМА ОТПРАВЛЕНА!');
 
-    if (isFormSubmitting) return;
-
-    // Валидация формы
-    if (!validateForm()) {
+    if (isFormSubmitting) {
+      console.log('⏳ Уже отправляется...');
       return;
     }
 
-    // Показываем состояние загрузки
+    console.log('🔍 Валидация формы...');
+    if (!validateForm()) {
+      console.log('❌ Валидация не пройдена');
+      return;
+    }
+    console.log('✅ Валидация пройдена');
+
+    formWasSubmitted = true;
     isFormSubmitting = true;
     const submitBtn = document.getElementById('submitBtn');
     const loadingSpinner = document.getElementById('loadingSpinner');
@@ -908,7 +927,6 @@ function initFormValidation() {
       successMessage.textContent = '';
     }
 
-    // Сбор данных формы
     const formData = new FormData(this);
     const data = {
       name: formData.get('name'),
@@ -919,7 +937,8 @@ function initFormValidation() {
     };
 
     try {
-      // Отправка на сервер
+      console.log('📤 Отправка данных:', data);
+      
       const response = await fetch('sendmail.php', {
         method: 'POST',
         headers: {
@@ -929,93 +948,44 @@ function initFormValidation() {
       });
 
       const responseText = await response.text();
+      console.log('📥 Ответ сервера:', responseText);
 
       if (response.ok) {
-        try {
-          const result = JSON.parse(responseText);
-
-          if (result.success || !result.error) {
-            // Успешная отправка
-            if (successMessage) {
-              successMessage.textContent =
-                result.message ||
-                'Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.';
-              successMessage.style.color = '#4CAF50';
-              successMessage.style.display = 'block';
-            }
-
-            // Сброс формы через 3 секунды
-            setTimeout(() => {
-              modalForm.reset();
-              resetFormValidation();
-
-              const modalOverlay = document.getElementById('modalOverlay');
-              if (modalOverlay) {
-                modalOverlay.classList.remove('active');
-                document.body.classList.remove('modal-open');
-              }
-            }, 3000);
-          } else {
-            throw new Error(result.error || 'Ошибка сервера');
-          }
-        } catch (parseError) {
-          // Если ответ не JSON, но статус OK
-          if (successMessage) {
-            successMessage.textContent =
-              'Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.';
-            successMessage.style.color = '#4CAF50';
-            successMessage.style.display = 'block';
-          }
-
-          setTimeout(() => {
-            modalForm.reset();
-            resetFormValidation();
-
-            const modalOverlay = document.getElementById('modalOverlay');
-            if (modalOverlay) {
-              modalOverlay.classList.remove('active');
-              document.body.classList.remove('modal-open');
-            }
-          }, 3000);
+        if (successMessage) {
+          successMessage.textContent = 'Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее  время.';
+          successMessage.style.color = '#4CAF50';
+          successMessage.style.display = 'block';
         }
+
+        setTimeout(() => {
+          modalForm.reset();
+          resetFormValidation();
+          modalOverlay.classList.remove('active');
+          document.body.classList.remove('modal-open');
+        }, 2500);
       } else {
-        throw new Error('Ошибка сервера: ' + response.status);
+        throw new Error();
       }
     } catch (error) {
-      console.error('Ошибка отправки:', error);
+        console.error(error); // лог остаётся
 
-      if (successMessage) {
-        successMessage.textContent =
-          'Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз или позвоните нам.';
+        successMessage.textContent = 'Ошибка отправки. Пожалуйста, позвоните нам по телефону.';
         successMessage.style.color = '#f44336';
         successMessage.style.display = 'block';
-      }
 
-      isFormSubmitting = false;
-      if (submitBtn) submitBtn.disabled = false;
-      if (loadingSpinner) loadingSpinner.style.display = 'none';
-    }
+        isFormSubmitting = false;
+        submitBtn.disabled = false;
+        loadingSpinner.style.display = 'none';
+      }
   });
 }
 
-// ======================== ОСНОВНАЯ ИНИЦИАЛИЗАЦИЯ ========================
 document.addEventListener('DOMContentLoaded', function () {
-  // Инициализация формы
-  initFormValidation();
-
-  // Инициализация слайдера (если нужно)
   initSlider();
   initSliderHotkeys();
-
-  // Инициализация аккордеона (если нужно)
   initWhyUsSection();
-
-  // Инициализация модального окна
   initModal();
-
-  // Инициализация мобильного меню
   initMobileMenu();
-
-  // Инициализация плавной прокрутки
   initSmoothScroll();
+  initFormValidation();
 });
